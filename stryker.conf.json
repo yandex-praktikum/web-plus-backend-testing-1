@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "This config was generated using 'stryker init'. Please take a look at: https://stryker-mutator.io/docs/stryker-js/configuration/ for more information",
+  "packageManager": "npm",
+  "plugins": ["@stryker-mutator/jest-runner"],
+  "reporters": [
+    "html",
+    "clear-text",
+    "json"
+  ],
+  "testRunner": "jest",
+  "jest": {
+    "projectType": "custom",
+    "configFile": "./jest.config.json"
+  },
+  "coverageAnalysis": "perTest",
+  "mutate": ["./src/posts.service.ts"],
+  "thresholds": {
+    "break": 100
+  },
+  "concurrency": 2,
+  "mutator": {
+    "excludedMutations": ["UpdateOperator", "ArrayDeclaration"]
+  }
+}
