@@ -16,8 +16,12 @@ const originalConfig = `{"$schema":"./node_modules/@stryker-mutator/core/schema/
   try {
     await exec('stryker run');
   } catch(error) {
-    console.error(error)
-    }
+    let message = `Тесты завершились с ошибкой: ${error.message}`;
+    message += error.stdout ? `\nЛоги тестов: ${error.stdout}` : '';
+    message += error.stderr ? `\nКритические ошибки: ${error.stderr}` : '';
+    console.log(message);
+    process.exit(1);
+  }
 
   const mutationsErrors = JSON.parse(readFileSync(join(__dirname, 'mutations-errors.json'), 'utf-8'));
   const mutation = JSON.parse(readFileSync(join(__dirname, 'reports', 'mutation', 'mutation.json'), 'utf-8'));
